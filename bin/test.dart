@@ -239,4 +239,5 @@ if (summ == 0) {
   }
 
   print(textListNew.join());
+  print('Hello');
 }
