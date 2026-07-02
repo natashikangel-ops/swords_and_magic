@@ -220,6 +220,7 @@ if (summ == 0) {
   print(newList.join());
 */
 
+  /*
   String text = stdin.readLineSync() ?? '';
 
   if (text == '') {
@@ -240,4 +241,52 @@ if (summ == 0) {
 
   print(textListNew.join());
   print('Hello');
+*/
+
+  const List<String> names = [
+    'Yura',
+    'Dima',
+    'Vika',
+    'Masha',
+    'Vova',
+    'Nikita',
+    'Vlad',
+    'Petya',
+    'Kolya',
+    'Vasya',
+    'Sveta',
+    'Oleg',
+    'Alex',
+    'Alexey',
+    'Sergey',
+    'Pavel',
+    'Ivan',
+    'Igor',
+    'Vladimir',
+    'Alexandr',
+    'Andrey',
+    'Egor',
+    'Maksim',
+  ];
+
+  String text = stdin.readLineSync() ?? '';
+
+  if (text.isEmpty || int.tryParse(text) != null) {
+    print('Неправильное значение');
+    return;
+  }
+
+  List<String> NewNames = [];
+
+  for (var word in names) {
+    if (word.contains(text.toLowerCase()) || word.contains(text.toUpperCase())) {
+      NewNames.add(word);
+    }
+  }
+
+  if (NewNames.isEmpty) {
+    print('Пользователи не найдены');
+  } else {
+    NewNames.forEach(print);
+  }
 }
