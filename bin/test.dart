@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:io';
+import 'sum.dart';
 
 void main() {
   /* 
@@ -243,6 +244,7 @@ if (summ == 0) {
   print('Hello');
 */
 
+  /*
   const List<String> names = [
     'Yura',
     'Dima',
@@ -289,4 +291,59 @@ if (summ == 0) {
   } else {
     NewNames.forEach(print);
   }
+*/
+
+  //  print(checkValidAge(17, true, 18));
+
+  /*
+  final a = stdin.readLineSync() ?? '';
+  final b = stdin.readLineSync() ?? '';
+  try {
+    sum(a, b);
+    print('Конец программы');
+  } catch (error) {
+    print('Конец программы');
+  } finally {
+    print('Конец программы');
+  }
+*/
+
+  /*
+  int count = 1;
+
+  do {
+    if (count == 5) {
+      print('Достигнуто число 5, завершаем выполнение');
+      break;
+    }
+
+    print('Текущее значение count: $count');
+    count += 2;
+  } while (count <= 10);
+
+  print('Цикл завершен');
+*/
+
+  final a = stdin.readLineSync() ?? '';
+
+  List<String> textList = a.split(',');
+
+  try {
+    int summ = 0;
+
+    for (String numText in textList) {
+      int num = int.parse(numText);
+      if (num < 10) {
+        summ += num;
+      }
+    }
+
+    print(summ);
+  } catch (e) {
+    print('Неправильный операнд');
+  }
+
+  final result = sum(10, 20);
+  print(result);
+
 }
