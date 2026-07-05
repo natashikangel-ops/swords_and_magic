@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:io';
-import 'test_list.dart' as test_list;
 
 void main() {
   /* 
