@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:io';
-import 'sum.dart';
 
 void main() {
   /* 
@@ -324,26 +323,60 @@ if (summ == 0) {
   print('Цикл завершен');
 */
 
-  final a = stdin.readLineSync() ?? '';
-
-  List<String> textList = a.split(',');
-
+  /*
   try {
-    int summ = 0;
+    
+    int num1 = int.parse(stdin.readLineSync()!);
+    int num2 = int.parse(stdin.readLineSync()!);
+    int num3 = int.parse(stdin.readLineSync()!);
 
-    for (String numText in textList) {
-      int num = int.parse(numText);
-      if (num < 10) {
-        summ += num;
-      }
+    if (num1 + num2 > num3 && num1 + num3 > num2 && num3 + num2 > num1) {
+      print('Треугольник существует');
+    } else {
+      print('Треугольник не существует');
     }
-
-    print(summ);
   } catch (e) {
-    print('Неправильный операнд');
+    print('Неверный операнд');
+    return;
   }
 
-  final result = sum(10, 20);
-  print(result);
+*/
 
+  // ignore: no_leading_underscores_for_local_identifiers
+  const _phoneBook = <String, int>{
+    'Yura': 1234567,
+    '123456799': 123456799,
+    'Dima': 3456789,
+    'Vika': 4567890,
+    'Masha': 5678901,
+    '6789012': 6789012,
+    'Vova': 7890123,
+    '8901234': 8901234,
+    'Nikita': 9012345,
+    'Vlad': 6789013,
+    'Petya': 23456789,
+    'Kolya': 34567890,
+    'Vasya': 45678901,
+    '56789012': 56789012,
+    'Sveta': 67890123,
+  };
+
+  final a = int.tryParse(stdin.readLineSync() ?? '') ?? 0;
+
+  if (a == 0) {
+    print('Неверные данные');
+    return;
+  }
+
+  String name = _phoneBook.entries
+      .firstWhere(((element) => element.value == a), orElse: () => const MapEntry('', 0),)
+      .key;
+
+  if (name == '') {
+    print('Номер телефона не найден');
+  } else if (int.tryParse(name) == null) {
+    print(name);
+  } else {
+    print('Ошибочная запись');
+  }
 }
