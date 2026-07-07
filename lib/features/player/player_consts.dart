@@ -10,3 +10,5 @@ const String spells = 'spells';
 const String warriorClass = 'Warrior';
 const String magicClass = 'Magic';
 const String paladinClass = 'Паладин';
+
+const String playerEntityJson = 'playerEntityJson.json';

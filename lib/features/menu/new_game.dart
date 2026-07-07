@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:swords_and_magic/features/game_over.dart';
+import 'package:swords_and_magic/features/game_core/game_core.dart';
 import 'package:swords_and_magic/features/player/player_consts.dart';
 import 'package:swords_and_magic/features/player/player_entity.dart';
 
@@ -23,8 +23,8 @@ void newGame() {
 
   initPlayer(inPlayerName: name ?? '', inPlayerClass: typeHero ?? '');
 
-  print('${playerEntity[playerName]} Добро пожаловать в мир Меча и Магии');
+  print('${playerEntity[playerName]} Добро в мир Меча и Магии');
   print('Ваш класс ${playerEntity[playerClass]}');
   print('Игра началась...');
-  exitGame();
+  gameCore();
 }

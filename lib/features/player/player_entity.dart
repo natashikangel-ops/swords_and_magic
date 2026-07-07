@@ -1,4 +1,5 @@
 import 'package:swords_and_magic/features/player/player_consts.dart';
+import 'package:swords_and_magic/features/spells/spells_const.dart';
 
 final playerEntity = <String, dynamic>{};
 
@@ -16,7 +17,7 @@ final _playerPaladin = <String, dynamic>{
   power: 0.0,
   protection: 0.0,
   lives: 100.0,
-  spells: <String>{},
+  spells: <String>[skyflare, tendrilex, stormix],
 };
 
 final _playerMagic = <String, dynamic>{
@@ -26,7 +27,7 @@ final _playerMagic = <String, dynamic>{
   protection: 0.0,
   lives: 100.0,
   mana: 100.0,
-  spells: <String>{},
+  spells: <String>[earthlynx, aquasphere, sunweave, typhunex, whirlora],
 };
 
 void initPlayer({required String inPlayerName, required String inPlayerClass}) {
