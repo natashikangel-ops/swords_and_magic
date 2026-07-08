@@ -12,40 +12,51 @@ void main() {
 }
 
 String infixToPostfix(String expression) {
-  
   List<String> output = [];
   List<String> stack = [];
+
+  String number = '';
 
   for (int i = 0; i < expression.length; i++) {
     String symbol = expression[i];
 
     if (isDigit(symbol)) {
-      output.add(symbol);
-    } else if (isOperator(symbol)) {
-      while (stack.isNotEmpty &&
-          isOperator(stack.last) &&
-          priority(stack.last) >= priority(symbol)) {
-        output.add(stack.removeLast());
-      }
-      stack.add(symbol);
-    } else if (symbol == '(') {
-      stack.add(symbol);
-    } else if (symbol == ')') {
-      while (stack.isNotEmpty && stack.last != '(') {
-        output.add(stack.removeLast());
+      number += symbol;
+    } else {
+      if (number.isNotEmpty) {
+        output.add(number);
+        number = '';
       }
 
-      if (stack.isNotEmpty && stack.last == '(') {
-        stack.removeLast();
+      if (isOperator(symbol)) {
+        while (stack.isNotEmpty &&
+            isOperator(stack.last) &&
+            priority(stack.last) >= priority(symbol)) {
+          output.add(stack.removeLast());
+        }
+        stack.add(symbol);
+      } else if (symbol == '(') {
+        stack.add(symbol);
+      } else if (symbol == ')') {
+        while (stack.isNotEmpty && stack.last != '(') {
+          output.add(stack.removeLast());
+        }
+
+        if (stack.isNotEmpty && stack.last == '(') {
+          stack.removeLast();
+        }
       }
     }
   }
-
+  if (number.isNotEmpty) {
+    output.add(number);
+    number = '';
+  }
   while (stack.isNotEmpty) {
     output.add(stack.removeLast());
   }
 
-  return output.join();
+  return output.join(' ');
 }
 
 int priority(String op) {
