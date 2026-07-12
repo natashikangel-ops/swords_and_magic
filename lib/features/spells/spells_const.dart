@@ -1,11 +1,12 @@
-
-const String skyflare = 'Skyflare';
-const String tendrilex = 'Tendrilex';
-const String flamorg = 'flamorg';
-const String lunazar = 'Lunazar';
-const String stormix = 'Stormix';
-const String earthlynx = 'Earthlynx';
-const String aquasphere = 'Aquasphere';
-const String sunweave = 'Sunweave';
-const String typhunex = 'Typhunex';
-const String whirlora = 'Whirlora';
+class SpellsConst {
+  static String skyflare = 'Skyflare';
+  static String tendrilex = 'Tendrilex';
+  static String flamorg = 'flamorg';
+  static String lunazar = 'Lunazar';
+  static String stormix = 'Stormix';
+  static String earthlynx = 'Earthlynx';
+  static String aquasphere = 'Aquasphere';
+  static String sunweave = 'Sunweave';
+  static String typhunex = 'Typhunex';
+  static String whirlora = 'Whirlora';
+}

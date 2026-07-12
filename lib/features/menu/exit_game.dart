@@ -9,7 +9,7 @@ import 'package:swords_and_magic/swords_and_magic.dart';
 void exitGame() {
   
   // Создаем файл
-  final file = File(playerEntityJson);
+  final file = File(PlayerConst.playerEntityJson);
   
   // Создаем json из playerEntity
 
