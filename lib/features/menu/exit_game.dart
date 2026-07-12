@@ -12,10 +12,9 @@ void exitGame() {
   final file = File(PlayerConst.playerEntityJson);
   
   // Создаем json из playerEntity
+  final json = jsonEncode(playerEntity.toJson());
 
-  try {
-    final json = jsonEncode(playerEntity);
-  
+  try {  
     // Записываем json в файл
     file.writeAsString(json);
     // Выводим сообщение о успешном сохранении

@@ -21,10 +21,12 @@ void newGame() {
 ''');
   final typeHero = stdin.readLineSync();
 
-  initPlayer(inPlayerName: name ?? '', inPlayerClass: typeHero ?? '');
+  playerEntity = PlayerEntity.create(inPlayerName: name ?? '', inPlayerClass: typeHero ?? '');
 
-  print('${playerEntity[PlayerConst.playerName]} Добро в мир Меча и Магии');
-  print('Ваш класс ${playerEntity[PlayerConst.playerClass]}');
+
+  print('${PlayerConst.playerName} Добро в мир Меча и Магии');
+  print('Ваш класс ${PlayerConst.playerClass}');
+
   print('Игра началась...');
   gameCore();
 }
