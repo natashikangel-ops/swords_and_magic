@@ -1,60 +1,35 @@
 import 'dart:io';
 
 import 'package:swords_and_magic/features/game_core/game_core.dart';
-import 'package:swords_and_magic/features/menu/new_game.dart';
-import 'package:swords_and_magic/features/menu/load_game.dart';
-import 'package:swords_and_magic/features/menu/exit_game.dart';
-import 'package:swords_and_magic/features/player/player_consts.dart';
+import 'package:swords_and_magic/features/menu/menu.dart';
 import 'package:swords_and_magic/features/player/player_entity.dart';
 
-bool isRunGame = true;
+/// Перенесем сюда из player_entity.dart глобальную переменную персонажа,
+/// чтобы в дальнейшем можно было обращаться к ней
+/// из любой точки приложения. Так же добавили модификатор ?
+/// для того, чтобы в случае отсутствия значения переменной
+/// присвоить ей значение null.
+PlayerEntity? playerEntity;
+
+/// Глобальный объект меню
+Menu mainMenu = Menu();
+
+/// Объявляем глобальный объект ядра игры
+GameCore gameCore = GameCore(playerEntity: playerEntity);
 
 void startGame() {
-  while (isRunGame) {
-    _game();
-  }
-}
-
-/// Вывод меню
-void _showMenu() {
-  print('1.Новая игра');
-  print('2.Загрузить игру');
-  print('3.Выйти');
-
-  print('\n');
-}
-
-/// Проверяем на правильность ввода пункта меню
-bool _checkEnter(int menu) {
-  return menu < 0 || menu > 3;
-}
-
-void _game() {
-  /// Меню
-  _showMenu();
-  print('Введите необходимый пункт: ');
-
+  // Выводим меню
+  mainMenu.showMenu();
   // Приводим строку к типу int
-  final int menu = int.tryParse(stdin.readLineSync() ?? "0") ?? 0;
-
-  if (_checkEnter(menu)) {
-    print('Вы ввели не правильный пункт меню!');
-  } else if (menu == 1) {
-    newGame();
-  } else if (menu == 2) {
-    
-    // Проверяем наличие сохранений, пытаемся загрузить игру
-    if (loadGame()) {
-      // Если загрузка прошла успешно, выводим сообщение
-      print('${playerEntity.playerName} Добро подаловать в мир Меча и Магии');
-      print('Ваш класс ${playerEntity.playerClass}');
-      // Запускаем ядро игры
-      gameCore();
-    } else {
-      // Если загрузка не удалась, начинаем новую игру
-      newGame();
-    }
-  } else if (menu == 3) {
-    exitGame();
-  }
+  final int menuItem = int.tryParse(stdin.readLineSync() ?? "0") ?? 0;
+  // Передаем в меню выбранный пункт
+  // и в обратных методах передаем функции
+  // для запуска новой игры, выхода из игры
+  // и загрузки игры
+  mainMenu.enterMenu(
+    isStartNewGame: () => gameCore.newGame(),
+    isExitGame: () => gameCore.exitGame(),
+    isLoadGame: () => gameCore.loadGame(),
+    menuItem: menuItem,
+  );
 }
