@@ -7,14 +7,13 @@ import 'package:swords_and_magic/features/player/player_entity.dart';
 final class GameCore {
   PlayerEntity? playerEntity;
 
-  GameCore({
-    required this.playerEntity,
-  });
+  GameCore({required this.playerEntity});
 
   void startGame() {
     print("Игра началась...");
     print(
-        '${playerEntity?.playerName} Добро в мир Меча и Магии'); // Обращение через класс
+      '${playerEntity?.playerName} Добро в мир Меча и Магии',
+    ); // Обращение через класс
     print('Ваш класс ${playerEntity?.playerClass}'); // Обращение через класс
 
     // Считываем данные из консоли
@@ -25,42 +24,47 @@ final class GameCore {
     }
   }
 
-  void exitGame() {
+  void exitGame() async {
     // Создаем файл
     final file = File(PlayerConst.playerEntityJson);
     // Создаем json из playerEntity
     final json = jsonEncode(playerEntity?.toJson());
-    try {
-      // Записываем json в файл
-      file.writeAsStringSync(json);
-      // Выводим сообщение о успешном сохранении
-      print("Игра успешно сохранена");
-    } on Object catch (err, st) {
-      // Выводим сообщение об ошибке
-      print("Ошибка сохранения: $err, $st");
-    }
+    print("Игра сохраняется...");
+    await file
+        .writeAsString(json)
+        .then((_) {
+          // Выводим сообщение о успешном сохранении
+          print("Игра успешно сохранена");
+        })
+        .onError((error, stackTrace) {
+          // Выводим сообщение об ошибке
+          print("Ошибка сохранения: $error, $stackTrace");
+        });
+
     print("Выход из игры");
   }
 
-  void loadGame() {
+  void loadGame() async {
     // Создаем файл
     final file = File(PlayerConst.playerEntityJson); // Обращение через класс
-    try {
-      // Читаем json из файла
-      final json = file.readAsStringSync();
-      // Получаем Map из json
-      final data = jsonDecode(json) as Map<String, dynamic>;
-      // Получаем сущность из карты
-      playerEntity = PlayerEntity.fromJson(data);
-      // Выводим сообщение об успешном загрузке
-      print("Игра успешно загружена...");
-      // Возвращаем true при успешной загрузке
-      startGame();
-    } catch (_) {
-      // Возвращаем false при ошибке или при отсутствии сохранений
-      print("Отсутствуют сохранения");
-      newGame();
-    }
+
+    print("Игра загружается...");
+    // Читаем json из файла
+    await file
+        .readAsString()
+        .then((value) {
+          // Получаем Map из json
+          final data = jsonDecode(value) as Map<String, dynamic>;
+          // Получаем сущность из карты
+          playerEntity = PlayerEntity.fromJson(data);
+          // Выводим сообщение об успешном загрузке
+          print("Игра успешно загружена...");
+          startGame();
+        })
+        .onError((error, stackTrace) {
+          print("Отсутствуют сохранения");
+          newGame();
+        });
   }
 
   void newGame() {
@@ -80,10 +84,11 @@ final class GameCore {
     final typeHero = stdin.readLineSync();
 
     playerEntity = PlayerEntity.create(
-        inPlayerName: name ?? '', inPlayerClass: typeHero ?? '');
+      inPlayerName: name ?? '',
+      inPlayerClass: typeHero ?? '',
+    );
 
     // Запускаем ядро игры
     startGame();
   }
-
 }
